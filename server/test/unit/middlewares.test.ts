@@ -6,7 +6,7 @@ import sinon from "sinon"
 import {UserRole} from "../../src/models/User"
 import jwt from "jsonwebtoken"
 
-describe.only(" Auth token middleware", () => {
+describe(" Auth token middleware", () => {
   const mockUserPayload = {
     id:"123",
     login:"Denis",
