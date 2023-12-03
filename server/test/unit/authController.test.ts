@@ -27,7 +27,7 @@ describe("AuthController", () => {
       }
     } as unknown as Model<IUser>
 
-    const userController = new AuthController(userModelStub)
+    const userController = new AuthController(userModelStub, "secret_code")
     const registeredUser = await userController.registerUser(user.login, password)
 
     expect(save.calledOnce).to.be.true
@@ -43,7 +43,7 @@ describe("AuthController", () => {
 
     } as unknown as Model<IUser>
 
-    const userController = new AuthController(userModelStub)
+    const userController = new AuthController(userModelStub, "secret_code")
     const registeredUsers = await userController.getUsers()
 
     expect(find.calledOnce).to.be.true
@@ -57,7 +57,7 @@ describe("AuthController", () => {
 
     } as unknown as Model<IUser>
 
-    const userController = new AuthController(userModelStub)
+    const userController = new AuthController(userModelStub,"secret_code")
     const token = await userController.authUser(user.login, password)
 
     expect(findOne.calledOnce).to.be.true
@@ -71,7 +71,7 @@ describe("AuthController", () => {
 
     } as unknown as Model<IUser>
 
-    const userController = new AuthController(userModelStub)
+    const userController = new AuthController(userModelStub,"secret_code")
     try {
       await userController.authUser(user.login, password)
     } catch (e) {
@@ -90,7 +90,7 @@ describe("AuthController", () => {
       findOne
     } as unknown as Model<IUser>
 
-    const userController = new AuthController(userModelStub)
+    const userController = new AuthController(userModelStub,"secret_code")
     try {
       await userController.authUser(user.login, password)
     } catch (e) {

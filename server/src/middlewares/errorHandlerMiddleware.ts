@@ -8,7 +8,7 @@ import {
 } from "../errors"
 import {duplicateInsertError} from "../handlers/errorTexts"
 
-export function errorHandlerMiddleware(err: any, req: Request, res: Response) {
+export function errorHandlerMiddleware(err: any, req: Request, res: Response, next: NextFunction) {
   if (err) {
     switch (true) {
       case (err instanceof CarNotFoundError):

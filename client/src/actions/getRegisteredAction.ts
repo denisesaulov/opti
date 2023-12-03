@@ -1,4 +1,4 @@
-import axios, {AxiosError} from 'axios'
+import axios, {AxiosError} from "axios"
 
 export const getRegisteredAction = async (options: GetRegisterOptions) => {
   const {url} = options

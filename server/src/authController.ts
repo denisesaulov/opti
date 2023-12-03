@@ -13,7 +13,7 @@ interface IAuthController {
 }
 
 export class AuthController implements IAuthController {
-  constructor(private readonly model: Model<IUser>) {
+  constructor(private readonly model: Model<IUser>, private readonly secreteCode: string) {
   }
 
   async authUser(login: string, password: string): Promise<string> {
@@ -28,7 +28,12 @@ export class AuthController implements IAuthController {
     if (!validPassword) {
       throw new UserPasswordError("wrong password")
     }
-    return generateAccessToken(user._id.toString(), user.login, user.roles)
+    const payload = {
+      login:  user.login,
+      id: user._id.toString(),
+      roles:user.roles
+    }
+    return generateAccessToken(payload, this.secreteCode)
   }
 
   async getUsers(): Promise<Document[]> {

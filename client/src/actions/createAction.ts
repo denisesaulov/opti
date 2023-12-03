@@ -1,4 +1,4 @@
-import axios, {AxiosError} from 'axios'
+import axios, {AxiosError} from "axios"
 
 export const createAction = async (str: string, options: CreateOptions) => {
   const {url, token} = options

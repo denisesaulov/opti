@@ -1,16 +1,19 @@
 import {NextFunction, Request, Response, Router} from "express"
 import {CarController, CarCreateDto} from "../carController"
 import {carCreateValidator, paramsValidator} from "../middlewares/validators"
-// import {authLoginPassMiddleware} from "../middlewares/authLoginPassMiddleware"
-import {authTokenMiddleware} from "../middlewares/authTokenMiddleware"
+import {getAuthTokenMiddleware} from "../middlewares/authTokenMiddleware"
 import Car from "../models/Car"
 import {checkRequestError} from "../middlewares/checkRequestError"
+import configObject from "../config"
+// import {authLoginPassMiddleware} from "../middlewares/authLoginPassMiddleware"
 
 const router = Router()
+const authTokenMiddleware = getAuthTokenMiddleware(configObject.SECRETE_CODE)
 const controller = new CarController(Car)
 
 export const updatableFields: Array<string> = ["manufacturer", "model", "manufacturedYear", "price", "color", "type"]
 export const createFields: Array<string> = [...updatableFields, "vin"]
+
 //guard on login and pass
 // router.use(authLoginPassMiddleware)
 
@@ -72,10 +75,5 @@ router.post("/",
     }
   }
 )
-
-interface QueryParamsGet {
-  field: keyof CarCreateDto,
-  order: 'asc' | 'desc'
-}
 
 export default router

@@ -3,9 +3,11 @@ import {loginAndPasswordValidators} from "../middlewares/validators"
 import User from "../models/User"
 import {checkRequestError} from "../middlewares/checkRequestError"
 import {AuthController} from "../authController"
+import configObject from "../config"
 
 const router = Router()
-const controller = new AuthController(User)
+const secreteCode = configObject.SECRETE_CODE
+const controller = new AuthController(User, secreteCode)
 
 router.post("/login",
   loginAndPasswordValidators,
